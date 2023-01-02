@@ -1,0 +1,288 @@
+// COMMON STYLE RULES
+
+// COMMONS FONTS
+
+@font-face {
+    font-family: "Pixel";
+    src: url("./../fnt/PressStart2P-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Noto Sans JP Black';
+    src: url("./../fnt/NotoSansJP-Black.otf");
+}
+
+@font-face {
+    font-family: 'Noto Sans JP Bold';
+    src: url("./../fnt/NotoSansJP-Bold.otf");
+}
+
+@font-face {
+    font-family: 'Noto Sans JP Light';
+    src: url("./../fnt/NotoSansJP-Light.otf");
+}
+
+@font-face {
+    font-family: 'Noto Sans JP Medium';
+    src: url("./../fnt/NotoSansJP-Medium.otf");
+}
+
+@font-face {
+    font-family: 'Noto Sans JP Regular';
+    src: url("./../fnt/NotoSansJP-Regular.otf");
+}
+
+@font-face {
+    font-family: 'Noto Sans JP Thin';
+    src: url("./../fnt/NotoSansJP-Thin.otf");
+}
+
+@font-face {
+    font-family: 'Material Symbols Rounded';
+    font-style: normal;
+    src: url("./../fnt/MaterialSymbolsRounded[FILL\,GRAD\,opsz\,wght].woff2") format('woff');
+}
+
+$F-PIXEL___: 'Pixel';
+$F-BLACK___: 'Noto Sans JP Black';
+$F-BOLD____: 'Noto Sans JP Bold';
+$F-LIGHT___: 'Noto Sans JP Light';
+$F-MEDIUM__: 'Noto Sans JP Medium';
+$F-REGULAR_: 'Noto Sans JP Regular';
+$F-THIN____: 'Noto Sans JP Thin';
+
+// NCS COLORS & DERIVATIVES
+$C-BLACK___: #000000FF;
+$C-BLUE____: #0087BDFF;
+$C-GREEN___: #009F6BFF;
+$C-ORANGE__: #E26A1AFF;
+$C-PINK____: #E28099FF;
+$C-PURPLE__: #624478FF;
+$C-RED_____: #C40233FF;
+$C-WHITE___: #FFFFFFFF;
+$C-YELLOW__: #FFD300FF;
+
+.bg-blue____ {
+    background-color: darken($C-BLUE____, 15%);
+}
+
+.bg-green___ {
+    background-color: darken($C-GREEN___, 00%);
+}
+
+.bg-purple__ {
+    background-color: darken($C-PURPLE__, 00%);
+}
+
+.bg-red_____ {
+    background-color: darken($C-RED_____, 15%);
+}
+
+.bg-yellow__ {
+    background-color: darken($C-YELLOW__, 10%);
+}
+
+// COLOR PROPERTIES
+$C-MAIN____: darken($C-BLUE____, 27%);
+$C-BACK____: darken($C-BLUE____, 32%);
+$C-SHADOW__: darken($C-WHITE___, 95%);
+
+// STYLE PROPERTIES
+$P-RADIUS__: 10px;
+$P-SHADEX__: 0 0 10px 0 $C-SHADOW__;
+$P-SHADIN__: inset $P-SHADEX__;
+$P-MARGIN__: 10px;
+$P-PADDING_: 10px;
+
+// SITE WIDE RULES
+
+body {
+    background-color: $C-BACK____;
+    color: $C-WHITE___;
+    display: flex;
+    flex-direction: column;
+    font-family: $F-MEDIUM__;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 0;
+}
+
+a, a:visited, a:active {
+    color: $C-BLUE____;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.material-symbols-rounded {
+    font-family: 'Material Symbols Rounded';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48,
+}
+
+/* PROPERTIES FOR THE HEADER */
+
+.header {
+    align-items: center;
+    background-color: $C-MAIN____;
+    box-shadow: $P-SHADEX__;
+    display: flex;
+    flex-direction: row;
+    font-family: $F-PIXEL___;
+    height: calc(5 * $P-MARGIN__);
+    inset: 0 0 auto 0;
+    padding: 0 $P-PADDING_ 0 calc(2 * $P-PADDING_);
+    position: fixed;
+    z-index: 99;
+}
+
+.header-logotype {
+    color: $C-WHITE___;
+    display: flex;
+    font-size: large;
+    margin-right: calc(5 * $P-MARGIN__);
+    white-space: nowrap;
+}
+
+.header-tab {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    white-space: nowrap;
+    a {
+        align-items: center;
+        border-bottom: solid 2px transparent;
+        color: $C-WHITE___;
+        display: flex;
+        padding: 0 calc(2 * $P-PADDING_) 0 $P-PADDING_;
+        text-transform: uppercase;
+    };
+    a:hover {
+        background-color: darken($C-MAIN____, 5%);
+        border-bottom: solid 2px $C-WHITE___;
+        box-shadow: $P-SHADIN__;
+        text-decoration: none;
+        transition: background-color 0.3s, border-bottom 0.3s;
+    }
+    a:not(:hover) {
+        transition: background-color 0.3s, border-bottom 0.3s;
+    }
+}
+
+.header-account {
+    display: flex;
+    height: 100%;
+    justify-content: flex-end;
+    width: 100%;
+    a {
+        align-items: center;
+        color: $C-WHITE___;
+        display: flex;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+// CONTENT
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-left {
+    display: flex;
+    flex-direction: column;
+    margin: calc((5 * $P-MARGIN__) + $P-MARGIN__) 0 0 0;
+    width: 75%;
+}
+
+.main-right {
+    display: flex;
+    flex-direction: column;
+    margin: calc((5 * $P-MARGIN__) + $P-MARGIN__) 0 0 0;
+    width: 25%;
+}
+
+.panel {
+    background-color: $C-MAIN____;
+    box-shadow: $P-SHADEX__;
+    display: flex;
+    flex-direction: column;
+    margin: $P-MARGIN__;
+}
+
+.panel-header {
+    align-items: center;
+    box-shadow: $P-SHADEX__;
+    cursor: pointer;
+    display: flex;
+    font-family: $F-PIXEL___;
+    height: calc(3 * $P-MARGIN__);
+    padding: $P-PADDING_;
+    user-select: none;
+    span {
+        margin-left: auto;
+    }
+}
+
+.panel-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: $P-PADDING_
+}
+
+.panel-episode {
+    margin: $P-MARGIN__;
+}
+
+.panel-episode-thumbnail {
+    box-shadow: $P-SHADEX__;
+    display: flex;
+    position: relative;
+    img {
+        width: 250px;
+    }
+}
+
+.panel-episode-number {
+    box-shadow: $P-SHADEX__;
+    color: $C-BLACK___;
+    font-family: $F-PIXEL___;
+    inset: 0 auto auto 0;
+    padding: calc($P-PADDING_ / 2);
+    position: absolute;
+}
+
+.panel-episode-watched {
+    background-color: $C-WHITE___;
+    border-radius: 100%;
+    color: $C-GREEN___;
+    inset: auto calc($P-PADDING_ / 2) calc($P-PADDING_ / 2) auto;
+    position: absolute;
+}
+
+.panel-episode-notwatched {
+    background-color: $C-WHITE___;
+    border-radius: 100%;
+    color: $C-RED_____;
+    inset: auto calc($P-PADDING_ / 2) calc($P-PADDING_ / 2) auto;
+    position: absolute;
+}
