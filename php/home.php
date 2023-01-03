@@ -65,6 +65,47 @@
             </div>
 
             <div class="panel-content">
+                <?php
+                    foreach (array_reverse(request_db('ova')) as $ova) {
+                        echo '<div class="panel-episode">';
+                            if (!empty($ova['link'])) {echo '<a target="_blank" rel="noopener noreferrer" href="https://www.crunchyroll.com/watch/' . $ova['link'] . '">';}
+                                echo '<div class="panel-episode-thumbnail">';
+                                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . IMG_THUMB . 'ova_' . $ova['id'] . '.jpg')) {
+                                        echo '<img src="' . IMG_THUMB . 'ova_' . $ova['id'] . '.jpg" />';
+                                    }
+                                    else {
+                                        echo '<img src="' . IMG_THUMB . 'ep_none.jpg" />';
+                                    }
+                                    if (date_create($ova['date']) < date_create()) {
+                                        echo '<div class="panel-episode-number bg-green___">';
+                                            echo 'OVA#' . $ova['id'];
+                                        echo '</div>';
+                                    }
+                                    else {
+                                        echo '<div class="panel-episode-number bg-yellow__">';
+                                            echo '#' . $ova['id'];
+                                        echo '</div>';
+                                    }
+                                    if ($ova['watched'] === 1) {
+                                        echo '<span class="material-symbols-rounded panel-episode-watched">check_circle</span>';
+                                    }
+                                    else {
+                                        echo '<span class="material-symbols-rounded panel-episode-notwatched">cancel</span>';
+                                    }
+                                echo '</div>';
+                                if (!empty($ova['link'])) {echo '</a>';}
+                            echo '<div class="panel-episode-title">';
+                                echo $ova['title_en'];
+                            echo '</div>';
+                            echo '<div class="panel-episode-title">';
+                                echo $ova['title_jp'];
+                            echo '</div>';
+                            echo '<div class="panel-episode-date">';
+                                echo date_format(date_create($ova['date']), 'Y-m-d');
+                            echo '</div>';
+                        echo '</div>';
+                    }
+                ?>
             </div>
 
         </div>
