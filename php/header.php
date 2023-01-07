@@ -1,12 +1,9 @@
-<?php include_once('./../_constants.php'); ?>
-<?php include_once('./../_database.php'); ?>
-
 <!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8">
     <title>MHA Watchlist</title>
-    <link rel="stylesheet" href="<?php echo COMMON_CSS; ?>" />
+    <link rel="stylesheet" href="<?php echo CSS_COMMON; ?>" />
     <script src="<?php echo LIB . 'jquery-3.6.3.min.js'; ?>"></script>
 </head>
 

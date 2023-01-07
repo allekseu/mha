@@ -13,9 +13,10 @@
                 echo '</div>';
 
                 echo '<div class="panel-content">';
-                    foreach (array_reverse(request_db('episode WHERE season =' . $season)) as $episode) {
+                    foreach (array_reverse((new dbRequestClass())->dbRequest('episode', 'WHERE season = ' . $season)) as $episode) {
                         echo '<div class="panel-episode">';
-                            echo '<a target="_blank" rel="noopener noreferrer" href="https://www.crunchyroll.com/watch/' . $episode['link'] . '">';
+                            if (!empty($episode['link'])) {echo '<a target="_blank" rel="noopener noreferrer" href="https://www.crunchyroll.com/watch/' . $episode['link'] . '">';}
+                            else {echo '<a>';}
                                 echo '<div class="panel-episode-thumbnail">';
                                     if (file_exists($_SERVER['DOCUMENT_ROOT'] . IMG_THUMB . 'ep_' . $episode['id'] . '.jpg')) {
                                         echo '<img src="' . IMG_THUMB . 'ep_' . $episode['id'] . '.jpg" />';
@@ -66,7 +67,7 @@
 
             <div class="panel-content">
                 <?php
-                    foreach (array_reverse(request_db('ova')) as $ova) {
+                    foreach (array_reverse((new dbRequestClass())->dbRequest('ova')) as $ova) {
                         echo '<div class="panel-episode">';
                             if (!empty($ova['link'])) {echo '<a target="_blank" rel="noopener noreferrer" href="https://www.crunchyroll.com/watch/' . $ova['link'] . '">';}
                                 echo '<div class="panel-episode-thumbnail">';
@@ -112,33 +113,60 @@
 
     </div>
 
-    <div class="main-right">
-        <div class="panel" id="movie3">
-            <div class="panel-header bg-red_____">
-                Movie 3
-                <span class="material-symbols-rounded panel-expand">expand_more</span>
-            </div>
-            <div class="panel-content">
-            </div>
-        </div>
+    <div class="main-right">             
+        <?php foreach ([3, 2, 1] as $number) {
+            
+            echo '<div class="panel">';
+                    
+                echo '<div class="panel-header bg-red_____">';
+                    echo 'Movie&nbsp;' . $number;
+                    echo '<span class="material-symbols-rounded panel-expand">expand_more</span>';
+                echo '</div>';
 
-        <div class="panel" id="movie2">
-            <div class="panel-header bg-red_____">
-                Movie 2
-                <span class="material-symbols-rounded panel-expand">expand_more</span>
-            </div>
-            <div class="panel-content">
-            </div>
-        </div>
+                echo '<div class="panel-content">';
+                    foreach (array_reverse((new dbRequestClass())->dbRequest('movie', 'WHERE id = ' . $number)) as $movie) {
+                        echo '<div class="panel-episode">';
+                            if (!empty($movie['link'])) {echo '<a target="_blank" rel="noopener noreferrer" href="https://www.crunchyroll.com/watch/' . $movie['link'] . '">';}
+                                echo '<div class="panel-episode-thumbnail">';
+                                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . IMG_THUMB . 'movie_' . $movie['id'] . '.jpg')) {
+                                        echo '<img src="' . IMG_THUMB . 'movie_' . $movie['id'] . '.jpg" />';
+                                    }
+                                    else {
+                                        echo '<img src="' . IMG_THUMB . 'ep_none.jpg" />';
+                                    }
+                                    if (date_create($movie['date']) < date_create()) {
+                                        echo '<div class="panel-episode-number bg-green___">';
+                                            echo 'MOVIE#' . $movie['id'];
+                                        echo '</div>';
+                                    }
+                                    else {
+                                        echo '<div class="panel-episode-number bg-yellow__">';
+                                            echo '#' . $movie['id'];
+                                        echo '</div>';
+                                    }
+                                    if ($movie['watched'] === 1) {
+                                        echo '<span class="material-symbols-rounded panel-episode-watched">check_circle</span>';
+                                    }
+                                    else {
+                                        echo '<span class="material-symbols-rounded panel-episode-notwatched">cancel</span>';
+                                    }
+                                echo '</div>';
+                            if (!empty($movie['link'])) {echo '</a>';}
+                            echo '<div class="panel-episode-title">';
+                                echo $movie['title_en'];
+                            echo '</div>';
+                            echo '<div class="panel-episode-title">';
+                                echo $movie['title_jp'];
+                            echo '</div>';
+                            echo '<div class="panel-episode-date">';
+                                echo date_format(date_create($movie['date']), 'Y-m-d');
+                            echo '</div>';
+                        echo '</div>';
+                    }
+                echo '</div>';
+            echo '</div>';
 
-        <div class="panel" id="movie1">
-            <div class="panel-header bg-red_____">
-                Movie 1
-                <span class="material-symbols-rounded panel-expand">expand_more</span>
-            </div>
-            <div class="panel-content">
-            </div>
-        </div>
+        } ?>
     </div>
 
 </div>
